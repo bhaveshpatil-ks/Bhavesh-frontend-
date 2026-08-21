@@ -1,5 +1,5 @@
-﻿// API Configuration for Frontend <-> Render Backend
-const DEFAULT_BACKEND_URL = 'https://bhaveshpatil-backend.onrender.com';
+// API Configuration for Frontend <-> Backend
+const DEFAULT_BACKEND_URL = '';
 
 export const API_BASE_URL = (
   import.meta.env.VITE_API_URL ||
@@ -13,6 +13,12 @@ export const API_BASE_URL = (
  * @returns {Promise<{ reply: string }>}
  */
 export async function sendChatMessage(message) {
+  if (!API_BASE_URL) {
+    return {
+      reply: `Hi! Thanks for reaching out. Bhavesh can be reached directly via email at bhaveshpatil4251@gmail.com or WhatsApp at +91 93076 01125.`
+    };
+  }
+
   try {
     const res = await fetch(`${API_BASE_URL}/ai`, {
       method: 'POST',
@@ -32,7 +38,7 @@ export async function sendChatMessage(message) {
   } catch (err) {
     console.warn('Backend AI fetch failed, using smart local fallback:', err);
     return {
-      reply: `I received your message! (Note: The Render backend is currently waking up from spin-down. If you want direct contact, Bhavesh can be reached at bhaveshpatil4251@gmail.com or WhatsApp +91 93076 01125).`
+      reply: `I received your message! For direct contact, Bhavesh can be reached at bhaveshpatil4251@gmail.com or WhatsApp +91 93076 01125.`
     };
   }
 }

@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # ⚡ Bhavesh Patil — Full-Stack Developer Portfolio
 
@@ -22,7 +22,7 @@
 
 - **🎬 Video Background Hero**: Immersive grayscale video hero with interactive geolocation status drawer and live availability pill.
 - **📜 Smooth Scroll & Parallax Physics**: Integrated with [Lenis](https://lenis.darkroom.engineering/) smooth scrolling and GSAP ScrollTrigger for seamless sheet reveal transitions.
-- **🤖 Built-in AI Assistant**: Interactive floating AI chatbot connected to the Render backend via Groq LLM with quick prompt suggestions.
+- **🤖 Built-in AI Assistant**: Interactive floating AI chatbot connected to the backend via Groq LLM with quick prompt suggestions.
 - **🗂️ Interactive Contact Hub**: Stacked 6-capsule glassmorphic contact hub with one-click clipboard copying, WhatsApp direct integration, and embedded message form.
 - **📱 Universal Responsiveness**: Fully responsive across Windows/Mac desktops, laptops, iPads/tablets, and mobile smartphones with clean viewport handling.
 - **⚡ Single Page Application (SPA) Routing**: Powered by React Router v7 with zero-config Netlify redirects (`_redirects` & `netlify.toml`).
@@ -37,7 +37,7 @@
 | **Styling & UI** | Pure CSS3 (CSS Variables), Radix UI Primitives, Lucide Icons |
 | **Motion & Animation** | GSAP (GreenSock), ScrollTrigger, Lenis Smooth Scroll |
 | **Routing** | React Router DOM v7 |
-| **Backend Integration** | RESTful API Client communicating with Express / Node.js on Render |
+| **Backend Integration** | RESTful API Client communicating with Express / Node.js Backend |
 | **Deployment** | Netlify (Static SPA with `_redirects` proxy) |
 
 ---
@@ -98,7 +98,7 @@ frontend/
 3. **Configure Environment Variables**:
    Create a `.env` file in the root directory (based on `.env.example`):
    ```env
-   VITE_API_URL=https://bhaveshpatil-backend.onrender.com
+   VITE_API_URL=
    ```
 
 4. **Start Development Server**:
