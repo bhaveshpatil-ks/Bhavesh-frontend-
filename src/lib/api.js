@@ -1,5 +1,5 @@
-// API Configuration for Frontend <-> Backend
-const DEFAULT_BACKEND_URL = '';
+// API Configuration for Frontend <-> Railway Backend
+const DEFAULT_BACKEND_URL = 'https://bhaveshpatil-backend-production.up.railway.app';
 
 export const API_BASE_URL = (
   import.meta.env.VITE_API_URL ||
