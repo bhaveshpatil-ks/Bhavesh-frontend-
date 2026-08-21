@@ -1,0 +1,260 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-radial: radial-gradient(circle at 50% 10%, #141418 0%, #0a0a0a 60%, #050505 100%);
+  --card-bg: rgba(18, 18, 22, 0.85);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --card-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-bold: #ffffff;
+
+  --accent-blue: #ff4d00;
+  --accent-blue-light: rgba(255, 77, 0, 0.15);
+  --accent-blue-badge: #ff4d00;
+  --accent-orange: #ff4d00;
+
+  --btn-dark-bg: #18181b;
+  --btn-dark-text: #ffffff;
+  --btn-light-bg: #ffffff;
+  --btn-light-text: #09090b;
+  --btn-light-border: rgba(255, 255, 255, 0.15);
+  --btn-gray-bg: #d4d4d8;
+  --btn-gray-text: #18181b;
+  --btn-yellow-bg: #ffdd00;
+  --btn-yellow-text: #000000;
+
+  --badge-bg: rgba(255, 255, 255, 0.05);
+  --badge-text: #a1a1aa;
+  --badge-border: rgba(255, 255, 255, 0.1);
+
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-full: 9999px;
+  --radius-card: 24px;
+  --radius-inner: 16px;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #0a0a0a;
+  --bg-radial: radial-gradient(circle at 50% 10%, #141418 0%, #0a0a0a 60%, #050505 100%);
+  --card-bg: rgba(18, 18, 22, 0.85);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --card-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-bold: #ffffff;
+
+  --accent-blue: #ff4d00;
+  --accent-blue-light: rgba(255, 77, 0, 0.15);
+  --accent-blue-badge: #ff4d00;
+  --accent-orange: #ff4d00;
+
+  --btn-dark-bg: #18181b;
+  --btn-dark-text: #ffffff;
+  --btn-light-bg: #ffffff;
+  --btn-light-text: #09090b;
+  --btn-light-border: rgba(255, 255, 255, 0.15);
+  --btn-gray-bg: #d4d4d8;
+  --btn-gray-text: #18181b;
+  --btn-yellow-bg: #ffdd00;
+  --btn-yellow-text: #000000;
+
+  --badge-bg: rgba(255, 255, 255, 0.05);
+  --badge-text: #a1a1aa;
+  --badge-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-radial);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-bold);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.muted-text {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Section Header Styles */
+.section-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--badge-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  text-align: center;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 36px auto;
+  line-height: 1.6;
+}
+
+/* Utility Pill Button Styles */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  white-space: nowrap;
+}
+
+.pill-btn:hover {
+  transform: translateY(-2px);
+}
+
+.pill-btn:active {
+  transform: translateY(0);
+}
+
+.pill-btn-dark {
+  background-color: var(--btn-dark-bg);
+  color: var(--btn-dark-text);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.pill-btn-dark:hover {
+  background-color: #27272a;
+}
+
+.pill-btn-light {
+  background-color: var(--btn-light-bg);
+  color: var(--btn-light-text);
+  border: 1px solid var(--btn-light-border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.pill-btn-light:hover {
+  background-color: #fafafa;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+.pill-btn-gray {
+  background-color: var(--btn-gray-bg);
+  color: var(--btn-gray-text);
+}
+
+.pill-btn-gray:hover {
+  filter: brightness(0.96);
+}
+
+.pill-btn-yellow {
+  background-color: var(--btn-yellow-bg);
+  color: var(--btn-yellow-text);
+  box-shadow: 0 4px 14px rgba(255, 221, 0, 0.3);
+}
+
+.pill-btn-yellow:hover {
+  background-color: #ffe426;
+  box-shadow: 0 6px 18px rgba(255, 221, 0, 0.4);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-blue-badge);
+  display: inline-block;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
