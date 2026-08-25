@@ -5,12 +5,21 @@ import { CheckCircle, XCircle, X } from 'lucide-react';
 let toastListeners = [];
 let toastQueue = [];
 
-export function toast({ title, description, variant = 'default', duration = 4000 }) {
+export function toast({ title, description, message, type, variant = 'default', duration = 4000 }) {
   const id = Date.now() + Math.random();
-  const newToast = { id, title, description, variant, duration };
+  const finalDesc = description || message || '';
+  const finalVariant = variant === 'destructive' || type === 'error' ? 'destructive' : 'default';
+  const newToast = { id, title, description: finalDesc, variant: finalVariant, duration };
   toastQueue = [...toastQueue, newToast];
   toastListeners.forEach((listener) => listener([...toastQueue]));
   return id;
+}
+
+export function useToast() {
+  const addToast = ({ title, description, message, type = 'default', variant = 'default', duration = 4000 }) => {
+    return toast({ title, description, message, type, variant, duration });
+  };
+  return { toast, addToast };
 }
 
 export function ToastProvider() {

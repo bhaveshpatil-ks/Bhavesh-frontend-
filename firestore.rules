@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        request.auth.token.email_verified == true && 
+        (request.auth.token.email == 'bhaveshpatil4251@gmail.com' || request.auth.token.email == 'bhaveshpatil1407@gmail.com');
+    }
+
+    // 1. Users collection:
+    // Only the authenticated owner can read/write their own profile.
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create, update: if isOwner(userId);
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
+    // 2. Usernames registry:
+    // Read allowed for uniqueness check, write only if authenticated.
+    match /usernames/{username} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // 3. Direct Live DM Chats & Messages:
+    // Only the specific chat owner or admin can read/write messages.
+    match /chats/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+
+      match /messages/{messageId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // 4. Inquiries & Support Tickets:
+    // Users can only access tickets they own.
+    match /tickets/{ticketId} {
+      allow read: if isAuthenticated() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    // 5. Leaderboard Payments:
+    // Public can only view approved success contributions. Proof URLs & pending payments protected.
+    match /payments/{paymentId} {
+      allow read: if resource.data.status == 'success' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // 6. Hardware Passkey Credentials:
+    // Completely locked from client-side direct access.
+    match /passkeys/{passkeyId} {
+      allow read, write: if false;
+    }
+
+    // 7. Account Deletion Audit Logs:
+    // Completely locked from client-side access. Managed by Backend Admin SDK only.
+    match /account_deletions/{deletionId} {
+      allow read, write: if false;
+    }
+
+    // Default: Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

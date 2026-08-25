@@ -93,14 +93,13 @@ export default function MegaFooter() {
               </Link>
 
               {/* Row 4: Admin & About this web */}
-              <button
-                type="button"
-                onClick={handleAdminClick}
+              <Link
+                to="/admin"
                 className="btn-pill btn-pill-gray"
               >
                 <User size={15} className="pill-icon" />
                 <span>Admin</span>
-              </button>
+              </Link>
 
               <button
                 type="button"
@@ -122,14 +121,14 @@ export default function MegaFooter() {
                 <span>Sparse</span>
               </a>
 
-              <button
-                type="button"
-                onClick={handleCoffeeClick}
+              <Link
+                to="/buy-me-a-coffee"
                 className="btn-pill btn-pill-yellow"
               >
                 <Coffee size={15} className="pill-icon" />
                 <span>Buy me a coffee</span>
-              </button>
+                <ArrowUpRight size={14} className="pill-arrow" />
+              </Link>
             </div>
           </div>
 

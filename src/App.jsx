@@ -10,12 +10,17 @@ import MegaFooter from './components/MegaFooter';
 import FloatingAIChat from './components/FloatingAIChat';
 import PageTransition from './components/PageTransition';
 import { ToastProvider } from './components/ui/toast';
+import { AuthProvider } from './context/AuthContext';
+import AuthModal from './components/AuthModal';
 
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import TechStackPage from './pages/TechStackPage';
 import EducationPage from './pages/EducationPage';
 import ContactPage from './pages/ContactPage';
+import AdminPage from './pages/AdminPage';
+import ChatPage from './pages/ChatPage';
+import BuyMeCoffeePage from './pages/BuyMeCoffeePage';
 import ScrollReveal from './components/ScrollReveal';
 
 // Register GSAP plugins
@@ -68,6 +73,11 @@ function AppContent({ theme, toggleTheme }) {
           <Route path="/education" element={<EducationPage />} />
           <Route path="/experience" element={<Navigate to="/education" replace />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/buy-me-a-coffee" element={<BuyMeCoffeePage />} />
+          <Route path="/coffee" element={<Navigate to="/buy-me-a-coffee" replace />} />
+          <Route path="/support" element={<Navigate to="/buy-me-a-coffee" replace />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </main>
 
@@ -77,6 +87,7 @@ function AppContent({ theme, toggleTheme }) {
 
       <FloatingAIChat />
       <ToastProvider />
+      <AuthModal />
     </>
   );
 }
@@ -121,10 +132,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-main">
-        <PageTransition onComplete={() => setTransitionDone(true)} />
-        <AppContent theme="dark" toggleTheme={() => {}} />
-      </div>
+      <AuthProvider>
+        <div className="app-main">
+          <PageTransition onComplete={() => setTransitionDone(true)} />
+          <AppContent theme="dark" toggleTheme={() => {}} />
+        </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -9,8 +9,6 @@ export const portfolioData = {
     role: "Full Stack Developer",
     bio: "Full Stack Developer building scalable, real-time web applications with modern architectures. Focused on performance, security, and production-ready systems.",
     location: "Maharashtra",
-    phone: "+91 93076 01125",
-    whatsapp: "+919307601125",
     sparseHandle: "@kaii",
     resume: "/assets/bhavesh-patil-resume.png",
     workType: "Freelance & Personal Projects",
