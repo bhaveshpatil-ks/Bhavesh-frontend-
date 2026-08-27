@@ -1,41 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowDown, Plus, Minus } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { isLowEndDevice } from '../lib/performanceUtils';
 
 export default function Hero() {
   const { profile } = portfolioData;
   const [coordsOpen, setCoordsOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 15;
-      const y = (e.clientY / innerHeight - 0.5) * 15;
-      setMousePos({ x, y });
-    };
+    const lowEnd = isLowEndDevice();
+    setIsLowEnd(lowEnd);
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    if (!lowEnd) {
+      const handleMouseMove = (e) => {
+        const { innerWidth, innerHeight } = window;
+        const x = (e.clientX / innerWidth - 0.5) * 15;
+        const y = (e.clientY / innerHeight - 0.5) * 15;
+        setMousePos({ x, y });
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
   }, []);
 
   return (
     <section id="home" className="north-hero-wrapper">
-      {/* Background Video Layer */}
+      {/* Background Media Layer: Video on High-End, Lightweight Picture on Low-End */}
       <div className="hero-video-container">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="hero-video"
-          style={{
-            transform: `scale(1.05) translate(${mousePos.x}px, ${mousePos.y}px)`,
-          }}
-        >
-          <source src="/assets/bhavesh face video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {isLowEnd ? (
+          <img
+            src="/assets/profile.png"
+            alt="Bhavesh Patil"
+            className="hero-image-fallback"
+            loading="eager"
+            fetchPriority="high"
+          />
+        ) : (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video"
+            style={{
+              transform: `scale(1.05) translate(${mousePos.x}px, ${mousePos.y}px)`,
+            }}
+          >
+            <source src="/assets/bhavesh face video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
         <div className="video-overlay-gradient" />
         <div className="video-overlay-noise" />
       </div>
@@ -110,7 +127,8 @@ export default function Hero() {
           overflow: hidden;
         }
 
-        .hero-video {
+        .hero-video,
+        .hero-image-fallback {
           width: 100%;
           height: 100%;
           object-fit: cover;
