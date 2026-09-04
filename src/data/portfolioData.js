@@ -189,12 +189,12 @@ export const portfolioData = {
       title: "Sparse — Distraction-Free Social Media",
       repoName: "sanketpadhyal/Sparse",
       description: "A minimal social media 💬 platform for mature users, focused on distraction-free interaction with basic posts, stories, chat, and a simple chronological feed. No reels, no addictive algorithms.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2070&auto=format&fit=crop",
+      image: "/assets/sparse-logo.png",
       tags: ["React", "Node.js", "Express", "MongoDB", "Socket.io", "Fullstack"],
       stars: 6,
       language: "JavaScript",
       github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      demo: "https://sparse.in/"
     },
     {
       id: "mail-flow",
@@ -288,7 +288,7 @@ export const portfolioData = {
       { label: "Contact", icon: "mail", variant: "dark", action: "#contact" },
       { label: "Admin", icon: "user", variant: "gray", action: "#" },
       { label: "About this web", icon: "info", variant: "gray", action: "#about" },
-      { label: "Sparse", icon: "sparkles", variant: "dark", action: "https://github.com/bhaveshpatil-ks" },
+      { label: "Sparse", icon: "sparkles", variant: "dark", action: "https://sparse.in/", external: true },
       { label: "Buy me a coffee", icon: "coffee", variant: "yellow", action: "#" }
     ]
   }
