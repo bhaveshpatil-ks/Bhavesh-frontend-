@@ -143,7 +143,7 @@ export default function MegaFooter() {
 
       <style>{`
         .north-footer-section {
-          padding: 60px 0 40px;
+          padding: 30px 0 20px;
           background: #050505;
           color: #ffffff;
           width: 100%;
@@ -153,22 +153,24 @@ export default function MegaFooter() {
         }
 
         .container {
-          max-width: 1200px;
+          max-width: 1440px;
+          width: 100%;
           margin: 0 auto;
-          padding: 0 24px;
+          padding: 0 40px;
           box-sizing: border-box;
         }
 
         .north-footer-card {
           position: relative;
+          width: 100%;
           background: rgba(18, 18, 22, 0.85);
           border: 1px solid rgba(255, 255, 255, 0.12);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
-          border-radius: 24px;
-          padding: 48px;
+          border-radius: 20px;
+          padding: 28px 36px;
           overflow: hidden;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
           box-sizing: border-box;
         }
 
@@ -176,23 +178,24 @@ export default function MegaFooter() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 48px;
-          padding-bottom: 36px;
+          gap: 36px;
+          padding-bottom: 20px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          width: 100%;
         }
 
         .mega-footer-bio {
-          flex: 1;
-          max-width: 480px;
+          flex: 1.1;
+          max-width: 500px;
         }
 
         .mega-footer-title {
           font-family: var(--font-heading);
-          font-size: clamp(32px, 4.5vw, 48px);
+          font-size: clamp(24px, 2.8vw, 34px);
           font-weight: 900;
           line-height: 1.05;
           letter-spacing: -0.03em;
-          margin-bottom: 14px;
+          margin-bottom: 8px;
           color: #ffffff;
         }
 
@@ -202,8 +205,8 @@ export default function MegaFooter() {
         }
 
         .mega-footer-desc {
-          font-size: 0.95rem;
-          line-height: 1.6;
+          font-size: 0.88rem;
+          line-height: 1.5;
           color: #a1a1aa;
           font-weight: 400;
         }
@@ -212,9 +215,10 @@ export default function MegaFooter() {
         .mega-footer-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-          width: 440px;
-          max-width: 100%;
+          gap: 8px;
+          flex: 1;
+          max-width: 480px;
+          width: 100%;
           box-sizing: border-box;
         }
 
@@ -222,16 +226,16 @@ export default function MegaFooter() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          padding: 12px 20px;
+          gap: 7px;
+          padding: 8px 16px;
           border-radius: 9999px;
           font-family: var(--font-heading);
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 700;
           letter-spacing: -0.01em;
           text-decoration: none;
           cursor: pointer;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
           border: 1px solid transparent;
           white-space: nowrap;
           box-sizing: border-box;
@@ -239,7 +243,7 @@ export default function MegaFooter() {
         }
 
         .btn-pill:hover {
-          transform: translateY(-2px);
+          transform: translateY(-1px);
         }
 
         .pill-icon {
@@ -310,7 +314,7 @@ export default function MegaFooter() {
         .btn-pill-yellow:hover {
           background: #ffe524;
           box-shadow: 0 6px 22px rgba(255, 221, 0, 0.45);
-          transform: translateY(-2px) scale(1.02);
+          transform: translateY(-1px) scale(1.01);
         }
 
         /* Bottom Copyright */
@@ -318,22 +322,26 @@ export default function MegaFooter() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-top: 28px;
-          font-size: 12px;
+          margin-top: 16px;
+          font-size: 11px;
           color: #52525b;
           font-family: var(--font-mono);
         }
 
         /* ─── Responsive Media Queries ──────────────── */
         @media (max-width: 960px) {
+          .container {
+            padding: 0 20px;
+          }
+
           .north-footer-card {
-            padding: 36px 30px;
+            padding: 24px 22px;
           }
 
           .footer-row {
             flex-direction: column;
             align-items: flex-start;
-            gap: 32px;
+            gap: 20px;
           }
 
           .mega-footer-bio {
@@ -341,24 +349,64 @@ export default function MegaFooter() {
           }
 
           .mega-footer-grid {
-            width: 100%;
+            max-width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
           }
         }
 
         @media (max-width: 520px) {
+          .north-footer-section {
+            padding: 16px 0 14px;
+          }
+
+          .container {
+            padding: 0 14px;
+          }
+
           .north-footer-card {
-            padding: 28px 20px;
-            border-radius: 20px;
+            padding: 20px 16px;
+            border-radius: 16px;
+          }
+
+          .footer-row {
+            gap: 16px;
+            padding-bottom: 14px;
+          }
+
+          .mega-footer-title {
+            font-size: 22px;
+            margin-bottom: 4px;
+          }
+
+          .mega-footer-desc {
+            font-size: 0.8rem;
+            line-height: 1.45;
           }
 
           .mega-footer-grid {
-            grid-template-columns: 1fr;
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
           }
 
           .btn-pill {
-            padding: 11px 16px;
-            font-size: 12px;
+            padding: 7px 10px;
+            font-size: 11px;
+            gap: 5px;
+            min-height: 36px;
+          }
+
+          .btn-pill span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .footer-copyright {
+            margin-top: 12px;
+            font-size: 10px;
+            justify-content: center;
+            text-align: center;
           }
         }
       `}</style>

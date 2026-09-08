@@ -39,18 +39,18 @@ export const portfolioData = {
     },
     {
       id: 2,
-      name: "Mail-flow-",
-      url: "https://github.com/bhaveshpatil-ks",
+      name: "sanketpadhyal/RivoCode-Cli",
+      url: "https://github.com/sanketpadhyal/RivoCode-Cli",
       visibility: "Public",
-      description: "MailFlow is a modern full-stack email automation platform built with React, Node.js, Express, MongoDB, and Nodemailer. Users can manage contacts, send professional email campaigns, track history, and automate workflows.",
+      description: "An autonomous AI coding assistant for developers. Write code, manage files, run terminal commands, and search the web directly from your terminal. Built with TypeScript and Bun as a modern, fast monorepo toolchain.",
       stars: 0,
-      language: "JavaScript",
-      languageColor: "#f1e05a",
+      language: "TypeScript",
+      languageColor: "#3178c6",
     },
     {
       id: 3,
       name: "sanketpadhyal/FacultyOne",
-      url: "https://github.com/bhaveshpatil-ks",
+      url: "https://github.com/sanketpadhyal/FacultyOne",
       visibility: "Public",
       description: "A secure cloud ☁️ workspace built for educators to manage and access teaching resources across devices and classrooms using one-time session tokens.",
       stars: 0,
@@ -60,7 +60,7 @@ export const portfolioData = {
     {
       id: 4,
       name: "sanketpadhyal/Odoy",
-      url: "https://github.com/bhaveshpatil-ks",
+      url: "https://github.com/sanketpadhyal/Odoy",
       visibility: "Public",
       description: "Odoy 💬 is a modern real-time social platform with seamless chat, friend system, and AI-powered interactions — built for speed, scale, and a clean user experience.",
       stars: 0,
@@ -70,29 +70,29 @@ export const portfolioData = {
     {
       id: 5,
       name: "sanketpadhyal/Sweface",
-      url: "https://github.com/bhaveshpatil-ks",
+      url: "https://github.com/sanketpadhyal/Sweface",
       visibility: "Public",
-      description: "A full-stack face recognition attendance system for companies, featuring an Android app, live website, admin dashboard, backend API, offline attendance sync, liveness checks, and Firebase Firestore...",
+      description: "A full-stack face recognition attendance system for companies, built with a mobile app, website, admin panel, backend API, and Firebase Firestore.",
       stars: 5,
       language: "JavaScript",
       languageColor: "#f1e05a",
     },
     {
       id: 6,
-      name: "AI-CALL-SUMMARY-APP",
-      url: "https://github.com/bhaveshpatil-ks",
+      name: "sanketpadhyal/Repart",
+      url: "https://github.com/sanketpadhyal/Repart",
       visibility: "Public",
-      description: "A modern, high-performance mobile AI CRM platform that auto-syncs phone call recordings, generates AI summaries (GPT-4o / Ollama), and manages lead pipelines with 1-tap SMS.",
-      stars: 1,
-      language: "JavaScript",
-      languageColor: "#f1e05a",
+      description: "A modern, high-performance developer intelligence & codebase visualization platform — supporting automated repository analysis, multi-tier layer detection, interactive architecture diagrams, API & schema exploration, and security hygiene audits.",
+      stars: 0,
+      language: "TypeScript",
+      languageColor: "#3178c6",
     },
   ],
 
   whyBhaveshCards: [
     {
       id: "built-projects",
-      badgeText: "6+",
+      badgeText: "8+",
       badgeSubtitle: "FULL STACK PROJECTS",
       title: "Built Projects",
       description: "Hands-on work across full stack products, combining frontend polish, backend logic, integrations, and shipping focus.",
@@ -134,9 +134,7 @@ export const portfolioData = {
       suffix: "end",
       skills: [
         { name: "Node.js", icon: "nodejs" },
-        { name: "Express.js", icon: "express" },
         { name: "MongoDB", icon: "mongodb" },
-        { name: "Python", icon: "python" },
         { name: "Firebase", icon: "firebase" },
         { name: "Google Cloud", icon: "gcloud" }
       ]
@@ -177,7 +175,7 @@ export const portfolioData = {
   projectsBanner: {
     badge: "PROJECTS",
     titlePrefix: "Bhavesh ",
-    titleSuffix: "has 6 pinned projects worth checking out.",
+    titleSuffix: "has 8 pinned projects worth checking out.",
     description: "Explore selected builds across real-time apps, email automation, AI platforms, and production-ready web systems in one focused showcase.",
     buttonTitle: "Go To Projects",
     buttonSubtitle: "Open portfolio ↗"
@@ -197,64 +195,64 @@ export const portfolioData = {
       demo: "https://sparse.in/"
     },
     {
-      id: "mail-flow",
-      title: "MailFlow — Email Automation Platform",
-      repoName: "Mail-flow-",
-      description: "MailFlow is a modern full-stack email automation platform built with React, Node.js, Express, MongoDB, and Nodemailer. Users can manage contacts, send professional email campaigns, track history, and automate workflows.",
-      image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=2070&auto=format&fit=crop",
-      tags: ["React", "Node.js", "Express", "MongoDB", "Nodemailer", "Fullstack"],
+      id: "rivocode-cli",
+      title: "RivoCode CLI — Autonomous AI Coding Assistant",
+      repoName: "sanketpadhyal/RivoCode-Cli",
+      description: "An autonomous AI coding assistant for developers. Write code, manage files, run terminal commands, and search the web directly from your terminal. Built with TypeScript and Bun as a modern, fast monorepo toolchain.",
+      image: "/assets/rivocode-cli.png",
+      tags: ["TypeScript", "Bun", "AI Agent", "CLI", "Developer Tools"],
       stars: 0,
-      language: "JavaScript",
-      github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      language: "TypeScript",
+      github: "https://github.com/sanketpadhyal/RivoCode-Cli",
+      demo: ""
     },
     {
       id: "faculty-one",
       title: "FacultyOne — Secure Educator Workspace",
       repoName: "sanketpadhyal/FacultyOne",
       description: "A secure cloud ☁️ workspace built for educators to manage and access teaching resources across devices and classrooms using one-time session tokens.",
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop",
+      image: "/assets/facultyone-logo.png",
       tags: ["React", "Tailwind CSS", "Firebase", "Node.js", "Cloud"],
       stars: 0,
       language: "JavaScript",
-      github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      github: "https://github.com/sanketpadhyal/FacultyOne",
+      demo: "https://facultyone.cloud"
     },
     {
       id: "odoy",
       title: "Odoy — Real-Time AI Social Platform",
       repoName: "sanketpadhyal/Odoy",
       description: "Odoy 💬 is a modern real-time social platform with seamless chat, friend system, and AI-powered interactions — built for speed, scale, and a clean user experience.",
-      image: "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=2070&auto=format&fit=crop",
+      image: "/assets/odoy-logo.png",
       tags: ["React", "CSS3", "Node.js", "AI", "Socket.io", "Fullstack"],
       stars: 0,
       language: "CSS",
-      github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      github: "https://github.com/sanketpadhyal/Odoy",
+      demo: "https://www.odoy.in"
     },
     {
       id: "sweface",
-      title: "Sweface — Face Recognition Attendance System",
+      title: "SweFace — Face Recognition Attendance System",
       repoName: "sanketpadhyal/Sweface",
-      description: "A full-stack face recognition attendance system for companies, featuring an Android app, live website, admin dashboard, backend API, offline attendance sync, liveness checks, and Firebase Firestore...",
-      image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=2070&auto=format&fit=crop",
+      description: "A full-stack face recognition attendance system for companies, built with a mobile app, website, admin panel, backend API, and Firebase Firestore.",
+      image: "/assets/sweface-logo.png",
       tags: ["JavaScript", "Android App", "Firebase", "Node.js", "AI / Vision", "Fullstack"],
       stars: 5,
       language: "JavaScript",
-      github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      github: "https://github.com/sanketpadhyal/Sweface",
+      demo: "https://sweface.sanketpadhyal.in/"
     },
     {
-      id: "ai-call-summary",
-      title: "AI Call Summary CRM — Mobile Call Intelligence",
-      repoName: "AI-CALL-SUMMARY-APP",
-      description: "A modern, high-performance mobile AI CRM platform that auto-syncs phone call recordings, generates AI summaries (GPT-4o / Ollama), and manages lead pipelines with 1-tap SMS.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-      tags: ["React Native", "GPT-4o", "Ollama", "Node.js", "AI", "Mobile"],
-      stars: 1,
-      language: "JavaScript",
-      github: "https://github.com/bhaveshpatil-ks",
-      demo: "#"
+      id: "repart",
+      title: "Repart — Developer Intelligence & Codebase Visualization",
+      repoName: "sanketpadhyal/Repart",
+      description: "A modern, high-performance developer intelligence & codebase visualization platform — supporting automated repository analysis, multi-tier layer detection (Frontend, Backend, Database, Auth, Testing), interactive architecture diagrams, API & schema exploration, contribution heatmap analytics, security hygiene audits, and side-by-side developer comparison.",
+      image: "/assets/repart-logo.png",
+      tags: ["React", "TypeScript", "Node.js", "AI Analytics", "DevTools", "Fullstack"],
+      stars: 0,
+      language: "TypeScript",
+      github: "https://github.com/sanketpadhyal/Repart",
+      demo: "https://repart.sanketpadhyal.in/"
     }
   ],
 

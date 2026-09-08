@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function StatementSection() {
   const metrics = [
-    { value: '6+', label: 'PROJECTS DELIVERED', sub: 'Full Stack & AI Apps' },
+    { value: '8+', label: 'PROJECTS DELIVERED', sub: 'Full Stack & AI Apps' },
     { value: '99.9%', label: 'UPTIME / PERFORMANCE', sub: 'High Reliability Systems' },
-    { value: '500+', label: 'GITHUB COMMITS', sub: 'Active Engineering' },
+    { value: '200+', label: 'GITHUB COMMITS', sub: 'Active Engineering' },
     { value: '4', label: 'TECH DOMAINS', sub: 'Frontend, Backend, Cloud & AI' },
   ];
 

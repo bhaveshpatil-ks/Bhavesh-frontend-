@@ -5,7 +5,7 @@ export default function WhyBhavesh() {
     {
       index: '01 / SPRINT',
       title: 'Built Projects & Delivery',
-      tag: '6+ FULL STACK APPS',
+      tag: '8+ FULL STACK APPS',
       description: 'Hands-on execution across full stack products, combining frontend polish, backend logic, and production shipping speed.',
       isDark: false,
     },

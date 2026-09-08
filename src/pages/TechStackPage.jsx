@@ -139,8 +139,8 @@ export default function TechStackPage() {
               {[
                 { num: 25, suffix: '+', label: 'Technologies' },
                 { num: 4, suffix: '', label: 'Domains' },
-                { num: 3, suffix: '+', label: 'Years Exp.' },
-                { num: 6, suffix: '+', label: 'Projects Built' },
+                { num: 2, suffix: '+', label: 'Years Exp.' },
+                { num: 8, suffix: '+', label: 'Projects Built' },
               ].map((stat, i) => (
                 <div key={i} className="ts-stat-item">
                   <div className="ts-stat-value">
