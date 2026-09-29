@@ -20,12 +20,27 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState('signin'); // 'signin' | 'signup' | 'reset'
+  const [termsModalOpen, setTermsModalOpen] = useState(false);
+
+  // Check if a specific user has agreed to Terms & Privacy Policy
+  const checkUserTermsAgreement = (user) => {
+    if (!user) return true;
+    const key = `bhavesh_terms_agreed_${user.uid}`;
+    const stored = localStorage.getItem(key);
+    return !!stored;
+  };
 
   // Listen to Firebase Auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
       if (user) {
+        // Verify terms agreement after login
+        const hasAgreed = checkUserTermsAgreement(user);
+        if (!hasAgreed) {
+          setTermsModalOpen(true);
+        }
+
         try {
           const idToken = await user.getIdToken();
           const syncRes = await syncFirebaseAuthToken(idToken);
@@ -39,12 +54,45 @@ export function AuthProvider({ children }) {
       } else {
         localStorage.removeItem('bhavesh_user_jwt');
         setBackendToken('');
+        setTermsModalOpen(false);
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  const agreeUserTerms = async () => {
+    if (currentUser) {
+      const key = `bhavesh_terms_agreed_${currentUser.uid}`;
+      const payload = {
+        agreed: true,
+        uid: currentUser.uid,
+        email: currentUser.email,
+        timestamp: new Date().toISOString(),
+      };
+      localStorage.setItem(key, JSON.stringify(payload));
+      localStorage.setItem('bhavesh_terms_agreed', JSON.stringify(payload)); // Also set general key
+      setTermsModalOpen(false);
+      toast({
+        title: 'Agreement Recorded',
+        description: 'Terms of Service and Privacy Policy accepted.',
+        variant: 'default',
+        duration: 3500,
+      });
+    }
+  };
+
+  const declineUserTerms = async () => {
+    setTermsModalOpen(false);
+    await logout();
+    toast({
+      title: 'Agreement Declined',
+      description: 'You have been signed out. You can sign in and accept anytime.',
+      variant: 'default',
+      duration: 4000,
+    });
+  };
 
   // Actions
   const signInWithGoogle = async () => {
@@ -195,6 +243,10 @@ export function AuthProvider({ children }) {
         setAuthModalMode,
         openAuthModal,
         closeAuthModal,
+        termsModalOpen,
+        setTermsModalOpen,
+        agreeUserTerms,
+        declineUserTerms,
         signInWithGoogle,
         signInWithEmail,
         signUpWithEmail,
