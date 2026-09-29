@@ -23,6 +23,8 @@
 - **🎬 Video Background Hero**: Immersive grayscale video hero with interactive geolocation status drawer and live availability pill.
 - **📜 Smooth Scroll & Parallax Physics**: Integrated with [Lenis](https://lenis.darkroom.engineering/) smooth scrolling and GSAP ScrollTrigger for seamless sheet reveal transitions.
 - **🤖 Built-in AI Assistant**: Interactive floating AI chatbot connected to the backend via Groq LLM with quick prompt suggestions.
+- **🛡️ Legal & Privacy Compliance**: Comprehensive Terms of Service (`/terms`), Privacy Policy (`/privacy`), and Cookie Consent manager (`/cookies`) with 100% zero-data-selling guarantee.
+- **🔒 Hardened JWT Authentication**: Cryptographically signed tokens for user tickets, admin moderation, and authenticated sessions.
 - **🗂️ Interactive Contact Hub**: Stacked 6-capsule glassmorphic contact hub with one-click clipboard copying, WhatsApp direct integration, and embedded message form.
 - **📱 Universal Responsiveness**: Fully responsive across Windows/Mac desktops, laptops, iPads/tablets, and mobile smartphones with clean viewport handling.
 - **⚡ Single Page Application (SPA) Routing**: Powered by React Router v7 with zero-config Netlify redirects (`_redirects` & `netlify.toml`).
