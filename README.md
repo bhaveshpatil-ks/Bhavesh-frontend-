@@ -7,6 +7,8 @@
 [![GSAP](https://img.shields.io/badge/GSAP-3.15.0-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
 [![Lenis](https://img.shields.io/badge/Lenis-Smooth_Scroll-black?style=for-the-badge)](https://lenis.darkroom.engineering/)
 [![Netlify Status](https://img.shields.io/badge/Deploy-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com/)
+[![Security](https://img.shields.io/badge/Security-Hardened_JWT-success?style=for-the-badge&logo=shield)](https://github.com/bhaveshpatil-ks/Bhavesh-frontend-)
+[![Privacy](https://img.shields.io/badge/Privacy-Zero_Data_Selling-FF4500?style=for-the-badge)](https://github.com/bhaveshpatil-ks/Bhavesh-frontend-)
 
 <p align="center">
   <strong>A modern, high-performance personal portfolio showcasing full-stack applications, real-time AI tools, and production-grade software engineering.</strong>
