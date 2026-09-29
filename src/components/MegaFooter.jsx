@@ -132,10 +132,32 @@ export default function MegaFooter() {
             </div>
           </div>
 
-          {/* Bottom Copyright Notice */}
+          {/* Bottom Copyright & Legal Compliance Notice */}
           <div className="footer-copyright">
             <div className="copyright-text">
               © {new Date().getFullYear()} {profile.name} {profile.lastName}. All rights reserved.
+            </div>
+
+            <div className="footer-legal-group">
+              <Link to="/terms" className="footer-legal-link">
+                Terms of Service
+              </Link>
+              <span className="footer-legal-dot">•</span>
+              <Link to="/privacy" className="footer-legal-link">
+                Privacy Policy
+              </Link>
+              <span className="footer-legal-dot">•</span>
+              <Link to="/cookies" className="footer-legal-link">
+                Cookie Policy
+              </Link>
+              <span className="footer-legal-dot">•</span>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent('open-cookie-settings'))}
+                className="footer-legal-btn"
+              >
+                Cookie Settings
+              </button>
             </div>
           </div>
         </div>
@@ -317,15 +339,55 @@ export default function MegaFooter() {
           transform: translateY(-1px) scale(1.01);
         }
 
-        /* Bottom Copyright */
+        /* Bottom Copyright & Legal */
         .footer-copyright {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-top: 16px;
-          font-size: 11px;
-          color: #52525b;
-          font-family: var(--font-mono);
+          margin-top: 18px;
+          font-size: 11.5px;
+          color: #71717a;
+          font-family: var(--font-mono, monospace);
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .footer-legal-group {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .footer-legal-link {
+          color: #a1a1aa;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .footer-legal-link:hover {
+          color: #ff4500;
+          text-decoration: underline;
+        }
+
+        .footer-legal-btn {
+          background: transparent;
+          border: none;
+          color: #a1a1aa;
+          cursor: pointer;
+          font-size: 11.5px;
+          font-family: inherit;
+          padding: 0;
+          transition: color 0.2s ease;
+        }
+
+        .footer-legal-btn:hover {
+          color: #ff4500;
+          text-decoration: underline;
+        }
+
+        .footer-legal-dot {
+          color: #3f3f46;
         }
 
         /* ─── Responsive Media Queries ──────────────── */
