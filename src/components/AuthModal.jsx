@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, Mail, Lock, User, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { X, Mail, Lock, User, ArrowRight, RefreshCw, AlertCircle, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function AuthModal() {
@@ -211,6 +212,23 @@ export default function AuthModal() {
               </>
             )}
           </button>
+
+          {authModalMode !== 'reset' && (
+            <div className="auth-terms-notice">
+              <ShieldCheck size={13} className="text-orange" />
+              <span>
+                By continuing, you agree to our{' '}
+                <Link to="/terms" onClick={closeAuthModal} className="auth-legal-link">
+                  Terms
+                </Link>{' '}
+                &{' '}
+                <Link to="/privacy" onClick={closeAuthModal} className="auth-legal-link">
+                  Privacy Policy
+                </Link>
+                . Your data is never sold.
+              </span>
+            </div>
+          )}
         </form>
 
         {/* Footer Mode Switcher */}
@@ -494,6 +512,33 @@ export default function AuthModal() {
         .auth-main-submit-btn:disabled {
           opacity: 0.6;
           cursor: not-allowed;
+        }
+
+        .auth-terms-notice {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          text-align: center;
+          font-size: 11px;
+          color: #71717a;
+          line-height: 1.4;
+          margin-top: 4px;
+        }
+
+        .auth-terms-notice .text-orange {
+          color: #ff4d00;
+          flex-shrink: 0;
+        }
+
+        .auth-legal-link {
+          color: #a1a1aa;
+          text-decoration: underline;
+          transition: color 0.2s ease;
+        }
+
+        .auth-legal-link:hover {
+          color: #ff4d00;
         }
 
         .auth-modal-footer {
