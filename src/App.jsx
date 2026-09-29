@@ -12,6 +12,7 @@ import PageTransition from './components/PageTransition';
 import { ToastProvider } from './components/ui/toast';
 import { AuthProvider } from './context/AuthContext';
 import AuthModal from './components/AuthModal';
+import TermsConsentModal from './components/TermsConsentModal';
 
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
@@ -21,6 +22,10 @@ import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
 import ChatPage from './pages/ChatPage';
 import BuyMeCoffeePage from './pages/BuyMeCoffeePage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import CookiePolicyPage from './pages/CookiePolicyPage';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import ScrollReveal from './components/ScrollReveal';
 
 // Register GSAP plugins
@@ -77,6 +82,13 @@ function AppContent({ theme, toggleTheme }) {
           <Route path="/buy-me-a-coffee" element={<BuyMeCoffeePage />} />
           <Route path="/coffee" element={<Navigate to="/buy-me-a-coffee" replace />} />
           <Route path="/support" element={<Navigate to="/buy-me-a-coffee" replace />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/terms-and-conditions" element={<TermsPage />} />
+          <Route path="/tos" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/cookies" element={<CookiePolicyPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </main>
@@ -86,8 +98,10 @@ function AppContent({ theme, toggleTheme }) {
       </ScrollReveal>
 
       <FloatingAIChat />
+      <CookieConsentBanner />
       <ToastProvider />
       <AuthModal />
+      <TermsConsentModal />
     </>
   );
 }

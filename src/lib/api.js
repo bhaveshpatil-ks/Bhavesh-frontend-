@@ -116,11 +116,17 @@ export async function sendChatMessage(message) {
  */
 export async function sendContactInquiry(formData) {
   try {
+    const token = localStorage.getItem('bhavesh_user_jwt');
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
     const res = await fetch(`${API_BASE_URL}/tickets/create`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         title: `Inquiry from ${formData.name}`,
         details: formData.message,
