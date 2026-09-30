@@ -86,6 +86,7 @@ export default function FloatingAIChat() {
   ]);
 
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -94,6 +95,16 @@ export default function FloatingAIChat() {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
+      setTimeout(() => inputRef.current?.focus(), 150);
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
     }
   }, [messages, isOpen]);
 
@@ -233,6 +244,7 @@ export default function FloatingAIChat() {
             }}
           >
             <input
+              ref={inputRef}
               type="text"
               placeholder="Ask me anything..."
               value={input}
