@@ -21,63 +21,88 @@ export function getLocalAIReply(rawPrompt) {
   const prompt = (rawPrompt || '').toLowerCase();
 
   // 1. 12th & HSC Education
-  if (prompt.includes('12th') || prompt.includes('hsc') || prompt.includes('12 th') || prompt.includes('twelfth') || prompt.includes('balmohan')) {
-    return "Bhavesh completed his **12th HSC** in the **PCMB stream** scoring **76.33%** from **Balmohan Jr. College, Chopda**.";
+  if (prompt.includes('12th') || prompt.includes('hsc') || prompt.includes('12 th') || prompt.includes('twelfth') || prompt.includes('balmohan') || prompt.includes('score') || prompt.includes('percentage') || prompt.includes('marks')) {
+    return "Bhavesh completed his **12th HSC (PCMB Stream)** scoring **76.33%** from **Balmohan Jr. College, Chopda, Maharashtra** (2023–2025).";
   }
 
   // 2. 10th & CBSE Schooling
-  if (prompt.includes('10th') || prompt.includes('cbse') || prompt.includes('10 th') || prompt.includes('tenth') || prompt.includes('oxford')) {
-    return "Bhavesh completed his **10th CBSE** schooling from **Oxford English Medium School, Chopda**.";
+  if (prompt.includes('10th') || prompt.includes('cbse') || prompt.includes('10 th') || prompt.includes('tenth') || prompt.includes('oxford') || prompt.includes('school')) {
+    return "Bhavesh completed his **10th CBSE** schooling with Distinction from **Oxford English Medium School, Chopda, Maharashtra**.";
   }
 
-  // 3. College / University / Degree
-  if (prompt.includes('college') || prompt.includes('degree') || prompt.includes('bca') || prompt.includes('university') || prompt.includes('mit') || prompt.includes('education') || prompt.includes('study') || prompt.includes('studying')) {
-    return "Bhavesh is currently in his **1st Year** pursuing a **Bachelor of Computer Applications (Honours)** at **MIT-WPU (World Peace University), Pune**.";
+  // 3. College / University / Degree / Studies
+  if (prompt.includes('college') || prompt.includes('degree') || prompt.includes('bca') || prompt.includes('university') || prompt.includes('mit') || prompt.includes('wpu') || prompt.includes('education') || prompt.includes('study') || prompt.includes('studying')) {
+    return "Bhavesh is in his **1st Year** pursuing a **Bachelor of Computer Applications (Honours)** at **MIT-WPU (World Peace University), Pune, Maharashtra**.";
   }
 
-  // 4. Projects (Sparse, MailFlow, FacultyOne, etc.)
+  // 4. Individual Projects Deep QA
   if (prompt.includes('sparse')) {
-    return "**Sparse** is Bhavesh's flagship project: a minimal, distraction-free social media platform featuring real-time chat, AI integration, post/stories feeds, and a Firebase + Supabase hybrid backend.";
+    return "🌟 **Sparse** is Bhavesh's flagship social network: a minimal, distraction-free platform designed without addictive algorithms or reels. Features include real-time messaging, chronological feeds, in-chat AI assistance, and a hybrid Supabase + Firebase backend architecture.";
+  }
+
+  if (prompt.includes('rivocode') || prompt.includes('rivo') || prompt.includes('cli') || prompt.includes('terminal ai')) {
+    return "⚡ **RivoCode-Cli** is an autonomous AI coding assistant in your terminal built with **TypeScript and Bun**. It enables developers to generate code, manage project files, execute terminal commands, and search web documentation straight from the CLI.";
   }
 
   if (prompt.includes('mailflow') || prompt.includes('mail flow') || prompt.includes('email automation')) {
-    return "**MailFlow** is a full-stack email campaign automation platform built with React, Node.js, Express, MongoDB, and Nodemailer for managing contacts and scheduling campaigns.";
+    return "📧 **MailFlow** is a modern full-stack email automation and campaign platform built with **React, Node.js, Express, MongoDB, and Nodemailer** for managing subscriber contacts, deliverability, and campaign metrics.";
   }
 
   if (prompt.includes('facultyone') || prompt.includes('faculty')) {
-    return "**FacultyOne** is a secure cloud workspace built for educators to manage and access teaching resources across classrooms using one-time session tokens.";
+    return "🏫 **FacultyOne** is a secure cloud workspace engineered for educators to manage and access teaching resources across devices and classrooms using one-time session tokens.";
+  }
+
+  if (prompt.includes('sweface') || prompt.includes('face') || prompt.includes('recognition')) {
+    return "👁️ **SweFace** is an AI face recognition and computer vision pipeline for automated identity verification and security access.";
+  }
+
+  if (prompt.includes('repart') || prompt.includes('hardware') || prompt.includes('inventory')) {
+    return "📦 **Repart** is a smart hardware inventory and equipment replacement tracking system with responsive analytics dashboards.";
+  }
+
+  if (prompt.includes('odoy')) {
+    return "💬 **Odoy** is a modern real-time social platform featuring chat, friend management, and AI-powered interactions built for speed and clean UX.";
+  }
+
+  if (prompt.includes('locateaid') || prompt.includes('blood') || prompt.includes('emergency')) {
+    return "🩸 **LocateAID-v3** is an emergency medical web platform with AI assistance and real-time blood requests.";
   }
 
   if (prompt.includes('project') || prompt.includes('work') || prompt.includes('portfolio') || prompt.includes('built') || prompt.includes('app')) {
-    return "Bhavesh's top builds include **Sparse** (minimal real-time social platform), **MailFlow** (email automation system), **FacultyOne** (educator cloud workspace), and **LocateAID-v3** (emergency blood assistance network). Explore them on the [Projects Page](/projects)!";
+    return "Bhavesh's key projects include:\n• **Sparse** — Minimalist real-time social media\n• **RivoCode-Cli** — Autonomous terminal AI coding assistant\n• **FacultyOne** — Educator cloud workspace with token auth\n• **MailFlow** — Full-stack email campaign platform\n• **SweFace** — AI facial recognition pipeline\n• **Repart** — Hardware inventory & tracking system\n\nExplore all builds on the [Projects Page](/projects)!";
   }
 
   // 5. Skills & Tech Stack
-  if (prompt.includes('skill') || prompt.includes('tech') || prompt.includes('stack') || prompt.includes('language') || prompt.includes('react') || prompt.includes('node') || prompt.includes('frontend') || prompt.includes('backend')) {
-    return "Bhavesh specializes in Full-Stack Web Development: **React.js, Node.js, Express, Tailwind CSS, GSAP Motion, Firebase Firestore/Auth, MongoDB, Supabase, and Passkey Authentication**.";
+  if (prompt.includes('skill') || prompt.includes('tech') || prompt.includes('stack') || prompt.includes('language') || prompt.includes('react') || prompt.includes('node') || prompt.includes('frontend') || prompt.includes('backend') || prompt.includes('database') || prompt.includes('gsap')) {
+    return "Bhavesh's core technical stack comprises:\n• **Frontend**: React 18, Vite 5, JavaScript (ESNext), TypeScript, GSAP Motion, Lenis Smooth Scroll, Tailwind CSS\n• **Backend**: Node.js, Express.js, REST APIs, WebSockets, JWT Authentication, Passkeys (WebAuthn)\n• **Databases & Cloud**: Firebase (Firestore, Auth), Supabase, MongoDB, Cloudinary CDN, Netlify, Render\n• **Architecture**: Scalable micro-components, clean architecture, and responsive design.";
   }
 
-  // 6. Contact & Hiring
-  if (prompt.includes('contact') || prompt.includes('reach') || prompt.includes('hire') || prompt.includes('freelance') || prompt.includes('job') || prompt.includes('internship') || prompt.includes('email') || prompt.includes('mail')) {
-    return "You can reach Bhavesh directly via email at **bhaveshpatil4251@gmail.com**, connect through the [Contact Page](/contact), or send a message via [Live DM Chat](/chat). He is open to freelance projects and software engineering internships!";
+  // 6. Contact & Hiring & Freelance
+  if (prompt.includes('contact') || prompt.includes('reach') || prompt.includes('hire') || prompt.includes('freelance') || prompt.includes('job') || prompt.includes('internship') || prompt.includes('email') || prompt.includes('mail') || prompt.includes('message')) {
+    return "You can reach Bhavesh directly:\n• **Email**: bhaveshpatil4251@gmail.com\n• **Contact Page**: Submit a message on the [Contact Page](/contact)\n• **Live Chat**: Connect in real time via [Chat Page](/chat)\n• **GitHub**: [github.com/bhaveshpatil-ks](https://github.com/bhaveshpatil-ks)\n\nHe is open for freelance projects, full-stack collaborations, and software engineering internships!";
   }
 
-  // 7. Coffee & Support
-  if (prompt.includes('coffee') || prompt.includes('support') || prompt.includes('donate') || prompt.includes('tip') || prompt.includes('upi')) {
-    return "You can support Bhavesh's open-source builds on the [Buy Me a Coffee Page](/buy-me-a-coffee) with UPI QR code (`bhaveshpatil4251@okaxis`) and get featured on the Live Leaderboard!";
+  // 7. Coffee & Support & Leaderboard
+  if (prompt.includes('coffee') || prompt.includes('support') || prompt.includes('donate') || prompt.includes('tip') || prompt.includes('upi') || prompt.includes('leaderboard')) {
+    return "You can support Bhavesh's open-source engineering on the [Buy Me a Coffee Page](/buy-me-a-coffee) via UPI (`bhaveshpatil4251@okaxis`) and get featured on the Live Supporter Leaderboard!";
   }
 
-  // 8. Who is Bhavesh / Intro
-  if (prompt.includes('who is') || prompt.includes('who are you') || prompt.includes('about bhavesh') || prompt.includes('intro') || prompt.includes('tell me about')) {
-    return "Bhavesh Patil is a Full-Stack Developer and 1st-year BCA student at MIT-WPU Pune, building scalable, high-performance web applications with clean modern architectures.";
+  // 8. Privacy & Data Safety
+  if (prompt.includes('privacy') || prompt.includes('data') || prompt.includes('cookie') || prompt.includes('security') || prompt.includes('terms') || prompt.includes('safe') || prompt.includes('sell')) {
+    return "🛡️ **Zero Data Selling Guarantee**: Bhavesh's portfolio strictly respects your privacy. We never sell, rent, or monetize visitor data. Browser storage is used only for essential UI preferences and session security. Read our [Privacy Policy](/privacy) and [Terms of Service](/terms).";
   }
 
-  // 9. Location
-  if (prompt.includes('where') || prompt.includes('location') || prompt.includes('city') || prompt.includes('pune') || prompt.includes('chopda')) {
-    return "Bhavesh is originally from Chopda, Maharashtra, and is currently based in **Pune, Maharashtra** studying at MIT-WPU.";
+  // 9. Location & Origin
+  if (prompt.includes('where') || prompt.includes('location') || prompt.includes('city') || prompt.includes('pune') || prompt.includes('chopda') || prompt.includes('live')) {
+    return "Bhavesh is originally from **Chopda, Maharashtra**, and is currently based in **Pune, Maharashtra** studying at MIT-WPU.";
   }
 
-  return "Hi! I am Bhavesh's AI Assistant. Feel free to ask me anything about Bhavesh's education (10th/12th/BCA), projects (like Sparse & MailFlow), tech stack, or how to contact him!";
+  // 10. Who is Bhavesh / Intro
+  if (prompt.includes('who is') || prompt.includes('who are you') || prompt.includes('about bhavesh') || prompt.includes('intro') || prompt.includes('tell me about') || prompt.includes('hi') || prompt.includes('hello') || prompt.includes('hey')) {
+    return "Hi there! 👋 I am Bhavesh Patil's AI Assistant.\n\nBhavesh is a **Full-Stack Developer** & 1st-year BCA student at **MIT-WPU Pune**, crafting high-performance digital experiences, scalable backend systems, and AI tools.\n\nAsk me anything about his **projects (like Sparse & RivoCode-Cli)**, **education**, **tech stack**, or **how to contact him**!";
+  }
+
+  return "Hi! I am Bhavesh's Portfolio AI Assistant. Feel free to ask me anything about Bhavesh's education (MIT-WPU BCA / Balmohan HSC), top projects (Sparse, RivoCode-Cli, FacultyOne, MailFlow), technical skills, or how to contact him!";
 }
 
 /**

@@ -127,6 +127,7 @@ export default function App() {
       smoothTouch: false,
     });
     globalLenis = lenis;
+    window.__lenis = lenis;
 
     const tickerUpdate = (time) => {
       lenis.raf(time * 1000);
@@ -140,6 +141,7 @@ export default function App() {
     return () => {
       lenis.destroy();
       globalLenis = null;
+      window.__lenis = null;
       gsap.ticker.remove(tickerUpdate);
     };
   }, []);

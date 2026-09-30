@@ -5,11 +5,10 @@ export default function StatementSection() {
     { value: '8+', label: 'PROJECTS DELIVERED', sub: 'Full Stack & AI Apps' },
     { value: '99.9%', label: 'UPTIME / PERFORMANCE', sub: 'High Reliability Systems' },
     { value: '200+', label: 'GITHUB COMMITS', sub: 'Active Engineering' },
-    { value: '4', label: 'TECH DOMAINS', sub: 'Frontend, Backend, Cloud & AI' },
   ];
 
   return (
-    <section className="statement-section">
+    <section id="selected-work" className="statement-section">
       {/* Visual Sheet Pull Handle Bar */}
       <div className="sheet-pull-indicator">
         <span className="pull-bar" />
@@ -109,7 +108,7 @@ export default function StatementSection() {
 
         .metrics-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 24px;
           margin-top: 20px;
           padding-top: 40px;

@@ -26,6 +26,20 @@ export default function Hero() {
     }
   }, []);
 
+  const handleScrollToWork = (e) => {
+    e.preventDefault();
+    if (window.__lenis) {
+      window.__lenis.scrollTo('#selected-work', { offset: -10, duration: 1.2 });
+    } else {
+      const target = document.getElementById('selected-work') || document.querySelector('.sheet-swipe-up') || document.querySelector('.statement-section');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <section id="home" className="north-hero-wrapper">
       {/* Background Media Layer: Video on High-End, Lightweight Picture on Low-End */}
@@ -65,7 +79,13 @@ export default function Hero() {
             Full-Stack / Creative Developer crafting high-performance digital experiences,
             scalable backend systems, and interactive web apps.
           </p>
-          <a href="#projects" className="view-work-link">
+          <a
+            href="#selected-work"
+            onClick={handleScrollToWork}
+            className="view-work-link"
+            role="button"
+            tabIndex={0}
+          >
             <span>VIEW SELECTED WORK</span>
             <ArrowDown size={14} className="arrow-down-icon" />
           </a>
