@@ -19,9 +19,9 @@ export const portfolioData = {
   },
 
   heroButtons: [
-    { label: "View Projects", icon: "folder", variant: "dark", action: "#projects" },
-    { label: "Contact Me", icon: "arrow-up-right", variant: "light", action: "#contact" },
-    { label: "Leaderboard", icon: "trophy", variant: "light", action: "#github" },
+    { label: "View Projects", icon: "folder", variant: "dark", action: "/projects" },
+    { label: "Contact Me", icon: "arrow-up-right", variant: "light", action: "/contact" },
+    { label: "Leaderboard", icon: "trophy", variant: "light", action: "/buy-me-a-coffee" },
     { label: "View Education", icon: "arrow-up-right", variant: "light", action: "/education" },
     { label: "GitHub", icon: "github", variant: "light", action: "https://github.com/bhaveshpatil-ks", external: true },
   ],
