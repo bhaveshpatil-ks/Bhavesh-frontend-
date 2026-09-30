@@ -9,11 +9,12 @@ import {
   LogOut, 
   ExternalLink, 
   EyeOff, 
+  Sparkles,
+  Zap,
   CheckCircle2, 
   AlertCircle 
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { portfolioData } from '../data/portfolioData';
 
 export default function TermsConsentModal() {
   const { 
@@ -23,10 +24,8 @@ export default function TermsConsentModal() {
     declineUserTerms 
   } = useAuth();
 
-  const { profile } = portfolioData;
-
-  const [agreedTerms, setAgreedTerms] = useState(false);
-  const [agreedPrivacy, setAgreedPrivacy] = useState(false);
+  const [agreedTerms, setAgreedTerms] = useState(true);
+  const [agreedPrivacy, setAgreedPrivacy] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -36,7 +35,7 @@ export default function TermsConsentModal() {
 
   const handleAgreeAndContinue = async () => {
     if (!agreedTerms || !agreedPrivacy) {
-      setError('Please check both boxes to confirm your agreement before continuing.');
+      setError('Please accept both terms and privacy protocols to proceed.');
       return;
     }
     setError('');
@@ -51,485 +50,521 @@ export default function TermsConsentModal() {
     }
   };
 
+  const handleQuickAcceptAll = async () => {
+    setAgreedTerms(true);
+    setAgreedPrivacy(true);
+    setError('');
+    setLoading(true);
+    try {
+      await agreeUserTerms();
+    } catch (err) {
+      setError('Failed to record agreement. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleDecline = async () => {
     await declineUserTerms();
   };
 
-  const userName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Member';
+  const userName = currentUser.displayName || currentUser.email?.split('@')[0] || 'Explorer';
+  const allAgreed = agreedTerms && agreedPrivacy;
 
   return (
-    <div className="terms-modal-overlay">
-      <div className="terms-modal-box">
-        {/* Header */}
-        <div className="terms-modal-header">
-          <div className="terms-modal-badge">
-            <ShieldCheck size={14} className="text-orange" />
-            <span>AUTHENTICATION SECURITY STEP</span>
+    <div className="terms-ai-overlay">
+      <div className="terms-ai-card">
+        {/* Top glowing ambient gradient */}
+        <div className="terms-ai-glow" />
+
+        {/* Header with AI badge */}
+        <div className="terms-ai-header">
+          <div className="terms-ai-badge">
+            <span className="ai-pulse-dot" />
+            <Sparkles size={12} className="text-orange" />
+            <span>AI AUTHENTICATION PROTOCOL // v2.4</span>
           </div>
 
-          <h2 className="terms-modal-title">
-            Welcome, <span className="terms-user-name">{userName}</span>!
+          <h2 className="terms-ai-title">
+            Welcome, <span className="terms-user-highlight">{userName}</span>
           </h2>
 
-          <p className="terms-modal-subtitle">
-            Before proceeding to your account, please review and accept our mutual security policies and zero-data exploitation pledge.
+          <p className="terms-ai-subtitle">
+            Please verify security compliance and our zero-data exploitation pledge to access your session.
           </p>
         </div>
 
         {error && (
-          <div className="terms-error-alert">
-            <AlertCircle size={15} />
+          <div className="terms-ai-alert">
+            <AlertCircle size={14} />
             <span>{error}</span>
           </div>
         )}
 
-        {/* Highlight Guarantee Box */}
-        <div className="terms-guarantee-card">
-          <div className="guarantee-header-row">
-            <div className="guarantee-icon-box">
-              <EyeOff size={18} className="text-orange" />
+        {/* AI Security Matrix Box */}
+        <div className="terms-ai-matrix">
+          <div className="matrix-row">
+            <div className="matrix-icon">
+              <EyeOff size={15} />
             </div>
-            <div>
-              <h4 className="guarantee-title">Zero Data Selling & Security Pledge</h4>
-              <p className="guarantee-desc">
-                We guarantee <strong>100% data privacy</strong>. Your name, email, credentials, and messages will <strong>NEVER</strong> be sold, rented, monetized, or cross-tracked with third-party advertisers.
+            <div className="matrix-content">
+              <div className="matrix-title">
+                Zero Data Selling Pledge
+                <span className="matrix-tag">100% Private</span>
+              </div>
+              <p className="matrix-text">
+                Your data is never sold, tracked, or monetized. Strictly non-commercial and encrypted with 256-bit TLS.
               </p>
             </div>
           </div>
 
-          <div className="guarantee-pills-row">
-            <span className="guarantee-pill">
-              <CheckCircle2 size={12} className="text-green" /> 256-Bit TLS Encryption
-            </span>
-            <span className="guarantee-pill">
-              <CheckCircle2 size={12} className="text-green" /> Strictly Non-Commercial
-            </span>
-            <span className="guarantee-pill">
-              <CheckCircle2 size={12} className="text-green" /> Instant Data Deletion on Request
-            </span>
+          <div className="matrix-divider" />
+
+          <div className="matrix-row">
+            <div className="matrix-icon">
+              <Lock size={15} />
+            </div>
+            <div className="matrix-content">
+              <div className="matrix-title">
+                Terms of Respectful Use
+                <span className="matrix-tag green">Protected</span>
+              </div>
+              <p className="matrix-text">
+                Safe interactive features, developer open-source attribution, and instant data deletion on request.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Scrollable Summary of Rules */}
-        <div className="terms-summary-scroll">
-          <div className="summary-item">
-            <h5 className="summary-item-title">
-              <FileText size={14} className="text-orange" /> 1. Terms of Service Summary
-            </h5>
-            <p className="summary-item-text">
-              You agree to use this portfolio and interactive features respectfully without attempting DDoS attacks, automated form spamming, or unauthorized penetration. Code showcases are intellectual property governed by open-source licenses.
-            </p>
-            <Link to="/terms" target="_blank" rel="noopener noreferrer" className="read-full-link">
-              Read Full Terms & Conditions <ExternalLink size={11} />
-            </Link>
+        {/* Interactive Checkbox Items (Clickable entire rows) */}
+        <div className="terms-ai-checks">
+          <div 
+            className={`check-item-row ${agreedTerms ? 'checked' : ''}`}
+            onClick={() => {
+              setAgreedTerms(!agreedTerms);
+              if (!agreedTerms && agreedPrivacy) setError('');
+            }}
+          >
+            <div className={`cyber-checkbox ${agreedTerms ? 'active' : ''}`}>
+              {agreedTerms && <Check size={12} strokeWidth={3} />}
+            </div>
+            <div className="check-text">
+              I agree to the{' '}
+              <Link 
+                to="/terms" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="terms-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Terms & Conditions <ExternalLink size={10} />
+              </Link>
+            </div>
           </div>
 
-          <div className="summary-item">
-            <h5 className="summary-item-title">
-              <Lock size={14} className="text-green" /> 2. Privacy Policy Summary
-            </h5>
-            <p className="summary-item-text">
-              Your login data (via Google or Email) is used strictly to identify your session for personal inquiries, leaderboard submissions, and support tickets. No marketing spam is ever sent.
-            </p>
-            <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="read-full-link">
-              Read Full Privacy Policy <ExternalLink size={11} />
-            </Link>
-          </div>
-        </div>
-
-        {/* Checkboxes */}
-        <div className="terms-checkbox-group">
-          <label className="terms-checkbox-label">
-            <input
-              type="checkbox"
-              checked={agreedTerms}
-              onChange={(e) => {
-                setAgreedTerms(e.target.checked);
-                if (e.target.checked && agreedPrivacy) setError('');
-              }}
-              className="terms-checkbox-input"
-            />
-            <span className="terms-checkbox-custom">
-              {agreedTerms && <Check size={12} />}
-            </span>
-            <span className="terms-label-text">
-              I have read, understood, and agree to the{' '}
-              <Link to="/terms" target="_blank" rel="noopener noreferrer" className="inline-link">
-                Terms & Conditions
-              </Link>.
-            </span>
-          </label>
-
-          <label className="terms-checkbox-label">
-            <input
-              type="checkbox"
-              checked={agreedPrivacy}
-              onChange={(e) => {
-                setAgreedPrivacy(e.target.checked);
-                if (e.target.checked && agreedTerms) setError('');
-              }}
-              className="terms-checkbox-input"
-            />
-            <span className="terms-checkbox-custom">
-              {agreedPrivacy && <Check size={12} />}
-            </span>
-            <span className="terms-label-text">
-              I acknowledge the{' '}
-              <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="inline-link">
-                Privacy Policy
+          <div 
+            className={`check-item-row ${agreedPrivacy ? 'checked' : ''}`}
+            onClick={() => {
+              setAgreedPrivacy(!agreedPrivacy);
+              if (agreedTerms && !agreedPrivacy) setError('');
+            }}
+          >
+            <div className={`cyber-checkbox ${agreedPrivacy ? 'active' : ''}`}>
+              {agreedPrivacy && <Check size={12} strokeWidth={3} />}
+            </div>
+            <div className="check-text">
+              I accept the{' '}
+              <Link 
+                to="/privacy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="terms-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Privacy Policy <ExternalLink size={10} />
               </Link>{' '}
-              and confirm understanding that my data is protected and never sold.
-            </span>
-          </label>
+              (Zero-Selling Guarantee)
+            </div>
+          </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="terms-modal-actions">
+        {/* Action Controls - Prominent & Sticky */}
+        <div className="terms-ai-actions">
           <button
             type="button"
-            className={`btn-agree-continue ${agreedTerms && agreedPrivacy ? 'active' : 'disabled'}`}
-            onClick={handleAgreeAndContinue}
+            className={`btn-ai-agree ${allAgreed ? 'glow' : 'dim'}`}
+            onClick={allAgreed ? handleAgreeAndContinue : handleQuickAcceptAll}
             disabled={loading}
           >
-            <span>{loading ? 'Recording Agreement...' : 'Agree & Continue'}</span>
+            <Zap size={15} className="btn-icon" />
+            <span>{loading ? 'Initializing Session...' : (allAgreed ? 'Agree & Launch Session' : 'Accept All & Launch')}</span>
             <ArrowRight size={15} />
           </button>
 
           <button
             type="button"
-            className="btn-decline-logout"
+            className="btn-ai-decline"
             onClick={handleDecline}
-            title="Decline and sign out"
+            title="Decline agreement and sign out"
           >
-            <LogOut size={14} />
-            <span>Decline & Sign Out</span>
+            <LogOut size={13} />
+            <span>Sign Out</span>
           </button>
         </div>
       </div>
 
       <style>{`
-        .terms-modal-overlay {
+        .terms-ai-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.88);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
+          background: rgba(5, 5, 8, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           z-index: 999999;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
-          animation: fadeIn 0.25s ease forwards;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          padding: 16px;
+          animation: termsFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.98); }
-          to { opacity: 1; transform: scale(1); }
+        @keyframes termsFadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.96) translateY(6px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
         }
 
-        .terms-modal-box {
+        .terms-ai-card {
           position: relative;
           width: 100%;
-          max-width: 520px;
-          background: #0f0f13;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          border-top: 3px solid #ff4500;
+          max-width: 480px;
+          background: #0d0d12;
+          border: 1px solid rgba(255, 77, 0, 0.22);
           border-radius: 20px;
-          padding: 30px 28px;
-          box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 69, 0, 0.2);
+          padding: 24px 24px 20px;
+          box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.9),
+            0 0 40px rgba(255, 69, 0, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
           color: #ffffff;
-          max-height: 90vh;
-          overflow-y: auto;
+          overflow: hidden;
+          max-height: 92vh;
+          display: flex;
+          flex-direction: column;
         }
 
-        .terms-modal-header {
+        .terms-ai-glow {
+          position: absolute;
+          top: 0;
+          left: 10%;
+          right: 10%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #ff4500, #ff7b00, transparent);
+          box-shadow: 0 0 14px rgba(255, 69, 0, 0.8);
+        }
+
+        /* Header */
+        .terms-ai-header {
           text-align: center;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
         }
 
-        .terms-modal-badge {
+        .terms-ai-badge {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 4px 12px;
-          background: rgba(255, 69, 0, 0.1);
+          padding: 3px 10px;
+          background: rgba(255, 69, 0, 0.08);
           border: 1px solid rgba(255, 69, 0, 0.25);
           border-radius: 999px;
           font-family: var(--font-mono, monospace);
-          font-size: 10.5px;
+          font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.08em;
-          color: #ff4500;
-          margin-bottom: 10px;
+          letter-spacing: 0.06em;
+          color: #ff5722;
+          margin-bottom: 8px;
         }
 
-        .terms-modal-title {
-          font-size: 22px;
+        .ai-pulse-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #4ade80;
+          box-shadow: 0 0 6px #4ade80;
+          animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .terms-ai-title {
+          font-family: var(--font-heading, sans-serif);
+          font-size: 21px;
           font-weight: 800;
           letter-spacing: -0.02em;
           color: #ffffff;
-          margin: 0 0 6px 0;
+          margin: 0 0 4px 0;
         }
 
-        .terms-user-name {
-          color: #ff4500;
+        .terms-user-highlight {
+          color: #ff5722;
+          text-shadow: 0 0 12px rgba(255, 69, 0, 0.35);
         }
 
-        .terms-modal-subtitle {
-          font-size: 13px;
+        .terms-ai-subtitle {
+          font-size: 12px;
           color: #a1a1aa;
-          line-height: 1.5;
+          line-height: 1.4;
           margin: 0;
         }
 
-        .terms-error-alert {
+        .terms-ai-alert {
           display: flex;
           align-items: center;
           gap: 8px;
           background: rgba(239, 68, 68, 0.12);
           border: 1px solid rgba(239, 68, 68, 0.3);
           color: #fca5a5;
-          padding: 10px 14px;
-          border-radius: 10px;
-          font-size: 12px;
-          margin-bottom: 16px;
-        }
-
-        /* Guarantee Box */
-        .terms-guarantee-card {
-          background: rgba(255, 69, 0, 0.05);
-          border: 1px solid rgba(255, 69, 0, 0.22);
-          border-radius: 14px;
-          padding: 16px;
-          margin-bottom: 16px;
-        }
-
-        .guarantee-header-row {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
+          padding: 8px 12px;
+          border-radius: 8px;
+          font-size: 11.5px;
           margin-bottom: 12px;
         }
 
-        .guarantee-icon-box {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: rgba(255, 69, 0, 0.12);
-          border: 1px solid rgba(255, 69, 0, 0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .guarantee-title {
-          font-size: 13.5px;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0 0 3px 0;
-        }
-
-        .guarantee-desc {
-          font-size: 12px;
-          line-height: 1.45;
-          color: #d4d4d8;
-          margin: 0;
-        }
-
-        .guarantee-pills-row {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-wrap: wrap;
-          padding-top: 10px;
-          border-top: 1px solid rgba(255, 69, 0, 0.12);
-        }
-
-        .guarantee-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          font-size: 11px;
-          color: #a1a1aa;
-          background: rgba(0, 0, 0, 0.3);
-          padding: 3px 8px;
-          border-radius: 6px;
-        }
-
-        .text-orange { color: #ff4500; }
-        .text-green { color: #4ade80; }
-
-        /* Summary Scroll */
-        .terms-summary-scroll {
+        /* Matrix Box */
+        .terms-ai-matrix {
           background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.07);
           border-radius: 12px;
-          padding: 14px;
-          margin-bottom: 18px;
+          padding: 12px 14px;
+          margin-bottom: 14px;
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 10px;
         }
 
-        .summary-item-title {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 12.5px;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0 0 4px 0;
-        }
-
-        .summary-item-text {
-          font-size: 11.5px;
-          line-height: 1.45;
-          color: #a1a1aa;
-          margin: 0 0 6px 0;
-        }
-
-        .read-full-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          font-size: 11px;
-          font-weight: 600;
-          color: #ff4500;
-          text-decoration: none;
-        }
-
-        .read-full-link:hover {
-          text-decoration: underline;
-        }
-
-        /* Checkboxes */
-        .terms-checkbox-group {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-bottom: 22px;
-        }
-
-        .terms-checkbox-label {
+        .matrix-row {
           display: flex;
           align-items: flex-start;
           gap: 10px;
+        }
+
+        .matrix-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          background: rgba(255, 69, 0, 0.1);
+          border: 1px solid rgba(255, 69, 0, 0.25);
+          color: #ff5722;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        .matrix-content {
+          flex: 1;
+        }
+
+        .matrix-title {
+          font-size: 12px;
+          font-weight: 700;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin-bottom: 2px;
+        }
+
+        .matrix-tag {
+          font-family: var(--font-mono, monospace);
+          font-size: 9.5px;
+          font-weight: 600;
+          padding: 1px 6px;
+          border-radius: 4px;
+          background: rgba(255, 69, 0, 0.15);
+          color: #ff7b00;
+          border: 1px solid rgba(255, 69, 0, 0.25);
+        }
+
+        .matrix-tag.green {
+          background: rgba(74, 222, 128, 0.1);
+          color: #4ade80;
+          border-color: rgba(74, 222, 128, 0.25);
+        }
+
+        .matrix-text {
+          font-size: 11px;
+          color: #9ca3af;
+          line-height: 1.35;
+          margin: 0;
+        }
+
+        .matrix-divider {
+          height: 1px;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Checkboxes */
+        .terms-ai-checks {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 18px;
+        }
+
+        .check-item-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 9px 12px;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid rgba(255, 255, 255, 0.07);
           cursor: pointer;
+          transition: all 0.18s ease;
           user-select: none;
         }
 
-        .terms-checkbox-input {
-          display: none;
+        .check-item-row:hover {
+          background: rgba(255, 255, 255, 0.045);
+          border-color: rgba(255, 69, 0, 0.3);
         }
 
-        .terms-checkbox-custom {
-          width: 18px;
-          height: 18px;
-          border-radius: 5px;
-          background: #18181c;
-          border: 1.5px solid rgba(255, 255, 255, 0.2);
+        .check-item-row.checked {
+          background: rgba(255, 69, 0, 0.05);
+          border-color: rgba(255, 69, 0, 0.25);
+        }
+
+        .cyber-checkbox {
+          width: 17px;
+          height: 17px;
+          border-radius: 4px;
+          background: #141419;
+          border: 1.5px solid rgba(255, 255, 255, 0.22);
           display: flex;
           align-items: center;
           justify-content: center;
           color: #ffffff;
           flex-shrink: 0;
-          margin-top: 1px;
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
         }
 
-        .terms-checkbox-input:checked + .terms-checkbox-custom {
+        .cyber-checkbox.active {
           background: #ff4500;
           border-color: #ff4500;
+          box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
         }
 
-        .terms-label-text {
-          font-size: 12.5px;
-          line-height: 1.45;
-          color: #d4d4d8;
+        .check-text {
+          font-size: 11.5px;
+          color: #d1d5db;
+          line-height: 1.35;
         }
 
-        .inline-link {
+        .terms-link {
           color: #ffffff;
           font-weight: 600;
           text-decoration: underline;
           text-underline-offset: 2px;
+          display: inline-flex;
+          align-items: center;
+          gap: 2px;
         }
 
-        .inline-link:hover {
+        .terms-link:hover {
           color: #ff4500;
         }
 
         /* Actions */
-        .terms-modal-actions {
+        .terms-ai-actions {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
+          margin-top: auto;
         }
 
-        .btn-agree-continue {
+        .btn-ai-agree {
           flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          padding: 12px 18px;
-          background: #ff4500;
+          gap: 7px;
+          padding: 11px 16px;
+          background: linear-gradient(135deg, #ff4500 0%, #ff5722 100%);
           color: #ffffff;
           border: none;
-          border-radius: 12px;
+          border-radius: 10px;
           font-family: var(--font-heading, sans-serif);
-          font-size: 13.5px;
+          font-size: 12.5px;
           font-weight: 700;
+          letter-spacing: 0.01em;
           cursor: pointer;
           transition: all 0.2s ease;
-          box-shadow: 0 4px 16px rgba(255, 69, 0, 0.35);
+          box-shadow: 0 4px 18px rgba(255, 69, 0, 0.35);
         }
 
-        .btn-agree-continue.active:hover {
-          background: #ff5722;
+        .btn-ai-agree.glow {
+          box-shadow: 0 0 20px rgba(255, 69, 0, 0.55), 0 4px 12px rgba(255, 69, 0, 0.3);
+        }
+
+        .btn-ai-agree:hover {
+          background: linear-gradient(135deg, #ff5722 0%, #ff6b3d 100%);
           transform: translateY(-1px);
         }
 
-        .btn-agree-continue.disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-          box-shadow: none;
+        .btn-ai-agree.dim {
+          background: #ff5722;
+          opacity: 0.9;
         }
 
-        .btn-decline-logout {
+        .btn-icon {
+          color: #ffd700;
+        }
+
+        .btn-ai-decline {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 12px 16px;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          color: #a1a1aa;
-          font-size: 12.5px;
+          gap: 5px;
+          padding: 11px 13px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 10px;
+          color: #9ca3af;
+          font-size: 11.5px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s ease;
           white-space: nowrap;
         }
 
-        .btn-decline-logout:hover {
-          background: rgba(239, 68, 68, 0.15);
+        .btn-ai-decline:hover {
+          background: rgba(239, 68, 68, 0.12);
           border-color: rgba(239, 68, 68, 0.3);
           color: #fca5a5;
         }
 
+        .text-orange { color: #ff5722; }
+
         @media (max-width: 480px) {
-          .terms-modal-box {
-            padding: 22px 18px;
+          .terms-ai-card {
+            padding: 20px 16px 16px;
           }
 
-          .terms-modal-actions {
+          .terms-ai-actions {
             flex-direction: column;
           }
 
-          .btn-agree-continue, .btn-decline-logout {
+          .btn-ai-agree, .btn-ai-decline {
             width: 100%;
           }
         }
