@@ -1,7 +1,76 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Sparkles, Bot, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MessageSquare, X, Send, Sparkles, Bot, User, ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import { sendChatMessage } from '../lib/api';
+
+function FormattedChatMessage({ text }) {
+  if (!text) return null;
+
+  const lines = text.split('\n');
+
+  return (
+    <div className="formatted-chat-msg">
+      {lines.map((line, lIdx) => {
+        if (!line.trim()) {
+          return <div key={lIdx} className="chat-line-break" />;
+        }
+
+        const parts = [];
+        const regex = /(\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*)/g;
+        let lastIdx = 0;
+        let match;
+
+        while ((match = regex.exec(line)) !== null) {
+          if (match.index > lastIdx) {
+            parts.push(line.substring(lastIdx, match.index));
+          }
+
+          if (match[2] && match[3]) {
+            const linkText = match[2];
+            const linkUrl = match[3];
+            const isInternal = linkUrl.startsWith('/');
+            parts.push(
+              isInternal ? (
+                <Link key={match.index} to={linkUrl} className="chat-inline-link">
+                  {linkText}
+                </Link>
+              ) : (
+                <a
+                  key={match.index}
+                  href={linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="chat-inline-link"
+                >
+                  {linkText}
+                </a>
+              )
+            );
+          } else if (match[4]) {
+            parts.push(<strong key={match.index}>{match[4]}</strong>);
+          } else if (match[5]) {
+            parts.push(<em key={match.index}>{match[5]}</em>);
+          }
+
+          lastIdx = regex.lastIndex;
+        }
+
+        if (lastIdx < line.length) {
+          parts.push(line.substring(lastIdx));
+        }
+
+        const isBullet = line.trim().startsWith('•') || line.trim().startsWith('-') || /^\d+\./.test(line.trim());
+
+        return (
+          <div key={lIdx} className={`chat-line ${isBullet ? 'chat-bullet-line' : ''}`}>
+            {parts}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function FloatingAIChat() {
   const { profile } = portfolioData;
@@ -12,7 +81,7 @@ export default function FloatingAIChat() {
     {
       id: 'welcome',
       role: 'assistant',
-      text: `Hi! I'm Bhavesh's AI Assistant. Ask me anything about his projects, skills, tech stack, or experience!`,
+      text: `Hi! I'm **Bhavesh's AI Assistant**. Ask me anything about his projects, technical stack, education, or freelance availability!`,
     },
   ]);
 
@@ -56,7 +125,7 @@ export default function FloatingAIChat() {
         {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          text: "I couldn't reach the backend right now. Please feel free to email bhaveshpatil4251@gmail.com directly!",
+          text: "I couldn't reach the server right now. You can email **bhaveshpatil4251@gmail.com** directly!",
         },
       ]);
     } finally {
@@ -65,9 +134,12 @@ export default function FloatingAIChat() {
   };
 
   const quickPrompts = [
-    "What are Bhavesh's top projects?",
-    "Tell me about Sparse",
-    "How can I contact Bhavesh?",
+    "🚀 Top Projects",
+    "🛠️ Tech Stack",
+    "🎓 Education",
+    "📬 Contact Bhavesh",
+    "📄 Resume",
+    "☕ Buy Me a Coffee",
   ];
 
   return (
@@ -117,7 +189,11 @@ export default function FloatingAIChat() {
             {messages.map((msg) => (
               <div key={msg.id} className={`ai-msg-row ${msg.role}`}>
                 <div className="ai-msg-bubble">
-                  {msg.text}
+                  {msg.role === 'assistant' ? (
+                    <FormattedChatMessage text={msg.text} />
+                  ) : (
+                    msg.text
+                  )}
                 </div>
               </div>
             ))}
@@ -134,21 +210,19 @@ export default function FloatingAIChat() {
           </div>
 
           {/* Quick Prompts */}
-          {messages.length <= 2 && (
-            <div className="ai-quick-prompts">
-              {quickPrompts.map((prompt, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  className="quick-prompt-btn"
-                  onClick={() => handleSend(prompt)}
-                >
-                  <Sparkles size={11} />
-                  <span>{prompt}</span>
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="ai-quick-prompts">
+            {quickPrompts.map((prompt, i) => (
+              <button
+                key={i}
+                type="button"
+                className="quick-prompt-btn"
+                onClick={() => handleSend(prompt)}
+              >
+                <Sparkles size={11} />
+                <span>{prompt}</span>
+              </button>
+            ))}
+          </div>
 
           {/* Input Footer */}
           <form
@@ -355,13 +429,41 @@ export default function FloatingAIChat() {
         }
 
         .ai-msg-bubble {
-          max-width: 82%;
+          max-width: 85%;
           padding: 10px 14px;
           font-size: 13px;
           line-height: 1.5;
           border-radius: 14px;
           word-break: break-word;
-          white-space: pre-wrap;
+        }
+
+        .formatted-chat-msg {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .chat-line {
+          line-height: 1.5;
+        }
+
+        .chat-bullet-line {
+          padding-left: 4px;
+        }
+
+        .chat-line-break {
+          height: 6px;
+        }
+
+        .chat-inline-link {
+          color: #ff7a00;
+          text-decoration: underline;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .chat-inline-link:hover {
+          color: #ffa133;
         }
 
         .ai-msg-row.user .ai-msg-bubble {
@@ -402,29 +504,38 @@ export default function FloatingAIChat() {
 
         /* ─── Quick Prompts ──────────────────────────── */
         .ai-quick-prompts {
-          padding: 0 16px 10px 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .quick-prompt-btn {
+          padding: 6px 12px 8px;
           display: flex;
           align-items: center;
           gap: 6px;
-          padding: 6px 12px;
-          background: rgba(255, 255, 255, 0.04);
+          overflow-x: auto;
+          white-space: nowrap;
+          border-top: 1px solid rgba(255, 255, 255, 0.04);
+          scrollbar-width: none;
+        }
+
+        .ai-quick-prompts::-webkit-scrollbar {
+          display: none;
+        }
+
+        .quick-prompt-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 4px 10px;
+          background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 8px;
+          border-radius: 999px;
           color: #d4d4d8;
-          font-size: 11.5px;
+          font-size: 11px;
           cursor: pointer;
-          text-align: left;
           transition: all 0.2s;
+          flex-shrink: 0;
+          font-weight: 500;
         }
 
         .quick-prompt-btn:hover {
-          background: rgba(255, 77, 0, 0.15);
+          background: rgba(255, 77, 0, 0.2);
           border-color: #ff4d00;
           color: #ffffff;
         }
