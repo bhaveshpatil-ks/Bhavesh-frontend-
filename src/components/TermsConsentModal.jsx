@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
@@ -9,8 +9,8 @@ import {
   LogOut, 
   ExternalLink, 
   EyeOff, 
-  Sparkles,
-  Zap,
+  Sparkles, 
+  Zap, 
   CheckCircle2, 
   AlertCircle 
 } from 'lucide-react';
@@ -28,6 +28,17 @@ export default function TermsConsentModal() {
   const [agreedPrivacy, setAgreedPrivacy] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (!termsModalOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        declineUserTerms();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [termsModalOpen, declineUserTerms]);
 
   if (!currentUser || !termsModalOpen) {
     return null;
