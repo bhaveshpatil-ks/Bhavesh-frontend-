@@ -18,18 +18,24 @@ import {
 import ScrollReveal from '../components/ScrollReveal';
 import { portfolioData } from '../data/portfolioData';
 import { toast } from '../components/ui/toast';
+import { useAuth } from '../context/AuthContext';
 
 const TERMS_STORAGE_KEY = 'bhavesh_terms_agreed';
 
 export default function TermsPage() {
   const { profile } = portfolioData;
+  const authContext = useAuth ? useAuth() : null;
+  const currentUser = authContext?.currentUser;
+  const agreeUserTerms = authContext?.agreeUserTerms;
+
   const [hasAgreed, setHasAgreed] = useState(false);
   const [agreeTimestamp, setAgreeTimestamp] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [activeSection, setActiveSection] = useState('section-1');
 
   useEffect(() => {
-    const saved = localStorage.getItem(TERMS_STORAGE_KEY);
+    const userKey = currentUser ? `bhavesh_terms_agreed_${currentUser.uid}` : TERMS_STORAGE_KEY;
+    const saved = localStorage.getItem(userKey) || localStorage.getItem(TERMS_STORAGE_KEY);
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -39,12 +45,17 @@ export default function TermsPage() {
         setHasAgreed(true);
       }
     }
-  }, []);
+  }, [currentUser]);
 
   const handleAgreeToggle = () => {
     if (!hasAgreed) {
       const now = new Date().toISOString();
-      localStorage.setItem(TERMS_STORAGE_KEY, JSON.stringify({ agreed: true, timestamp: now }));
+      const payload = { agreed: true, timestamp: now };
+      localStorage.setItem(TERMS_STORAGE_KEY, JSON.stringify(payload));
+      if (currentUser) {
+        localStorage.setItem(`bhavesh_terms_agreed_${currentUser.uid}`, JSON.stringify(payload));
+        if (agreeUserTerms) agreeUserTerms();
+      }
       setHasAgreed(true);
       setAgreeTimestamp(now);
       toast({
@@ -55,6 +66,9 @@ export default function TermsPage() {
       });
     } else {
       localStorage.removeItem(TERMS_STORAGE_KEY);
+      if (currentUser) {
+        localStorage.removeItem(`bhavesh_terms_agreed_${currentUser.uid}`);
+      }
       setHasAgreed(false);
       setAgreeTimestamp(null);
       toast({
