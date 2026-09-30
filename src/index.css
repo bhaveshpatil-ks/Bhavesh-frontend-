@@ -258,3 +258,22 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.25);
 }
+
+/* AI & Cyber Utility Mixins */
+@keyframes cyberNeonPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(255, 69, 0, 0.4), inset 0 0 8px rgba(255, 69, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 69, 0, 0.7), inset 0 0 14px rgba(255, 69, 0, 0.35);
+  }
+}
+
+.cyber-glow-pulse {
+  animation: cyberNeonPulse 3s infinite ease-in-out;
+}
+
+.text-cyber-orange {
+  color: #ff5722;
+  text-shadow: 0 0 12px rgba(255, 69, 0, 0.4);
+}
